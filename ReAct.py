@@ -2,8 +2,8 @@ import re
 import os
 from openai import OpenAI
 from dotenv import load_dotenv
-from tools import useWikipedia
-import prompts
+from tools import use_cmd
+import prompt
 
 load_dotenv()
 
@@ -13,7 +13,7 @@ class ReAct:
         self.openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         self.messages = []
         self.available_actions = {
-            "useWikipedia": useWikipedia
+            "use_cmd": use_cmd
         }
 
     def generate_text_with_conversation(self, messages):
@@ -40,7 +40,7 @@ class ReAct:
         function_param = None
 
         messages = [
-        {"role": "system", "content": prompts.system_prompt},
+        {"role": "system", "content": prompt.system_prompt},
         {"role": "user", "content": user_prompt},
     ]
 
@@ -76,5 +76,5 @@ class ReAct:
             else:
                 break
 # Example usage with specifying the model:
-session = ReAct(model="gpt-3.5-turbo")
-session.run_session("What's the Quran?")
+session = ReAct(model="gpt-4o")
+session.run_session("get the READMEFILE.MD of the github repo with this url 'https://github.com/OpenDevin/OpenDevin.git' ")
