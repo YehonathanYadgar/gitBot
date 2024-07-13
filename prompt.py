@@ -26,13 +26,6 @@ PAUSE
 
 You will be called again with the commandline output:
 Cloning into 'ChatDev'...
-remote: Enumerating objects: 2723, done.
-remote: Counting objects: 100% (299/299), done.
-remote: Compressing objects: 100% (241/241), done.
-remote: Total 2723 (delta 79), reused 260 (delta 57), pack-reused 2424
-Receiving objects: 100% (2723/2723), 134.84 MiB | 10.79 MiB/s, done.
-Resolving deltas: 100% (1240/1240), done.
-Updating files: 100% (1061/1061), done.
 PS C:\Users\yadga\OneDrive\Desktop\shalev> 
 
 Thought: Now that I have the repo i should clone into it

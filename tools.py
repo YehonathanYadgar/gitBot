@@ -1,26 +1,22 @@
-import subprocess
 import os
+import subprocess
 
 def use_cmd(command):
-    try:
-        # Get the current working directory
-        current_location = os.getcwd()
-        
-        # Run the command
-        result = subprocess.run(command, shell=True, check=True, capture_output=True, encoding='cp1252', errors='replace')
-        
-        # Prepare the output
-        cmd_output = result.stdout.strip()  # Remove leading/trailing whitespace
-        
-        if result.stderr:
-            cmd_output += "\n" + result.stderr.strip()
-        
-        # Combine the location and command output
-        full_output = f"{current_location}\n{cmd_output}"
-        
-        return full_output
-    except subprocess.CalledProcessError as e:
-        return f"Current location: {os.getcwd()}\n\nAn error occurred: {e}\nError output: {e.stderr}"
-    except Exception as e:
-        return f"Current location: {os.getcwd()}\n\nAn unexpected error occurred: {e}"
-    
+    if command.startswith('cd '):
+        # Extract the directory path
+        path = command[3:].strip()
+        try:
+            os.chdir(path)
+            return f"Changed directory to: {os.getcwd()}"
+        except FileNotFoundError:
+            return f"Directory not found: {path}"
+    else:
+        # For other commands, use subprocess as before
+        try:
+            p1 = subprocess.run(command, shell=True, capture_output=True, text=True, encoding='utf-8', errors='replace')
+            # Combine stdout and stderr, handling potential None values
+            output = (p1.stdout or '') + (p1.stderr or '')
+            return output
+        except Exception as e:
+            return f"An error occurred: {str(e)}"
+

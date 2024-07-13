@@ -45,7 +45,7 @@ class ReAct:
     ]
 
         turn_count = 1
-        max_turns = 5
+        max_turns = 7
 
         while turn_count < max_turns:
             print (f"Loop: {turn_count}")
@@ -75,6 +75,7 @@ class ReAct:
                     function_param = None
             else:
                 break
+
 # Example usage with specifying the model:
 session = ReAct(model="gpt-4o")
-session.run_session("get the READMEFILE.MD of the github repo with this url 'https://github.com/OpenDevin/OpenDevin.git' ")
+session.run_session("get the READMEFILE.MD of the github repo with this url 'https://github.com/OpenBMB/ChatDev.git' read it and set up the repo for me to use when(set up means doing whats the quicstart says)")
