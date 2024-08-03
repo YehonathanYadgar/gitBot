@@ -9,6 +9,7 @@ load_dotenv()
 
 class ReAct:
     def __init__(self, model):
+        self.logs = ''
         self.model = model
         self.openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         self.messages = []
@@ -40,7 +41,7 @@ class ReAct:
         function_param = None
 
         messages = [
-        {"role": "system", "content": prompt.system_prompt},
+        {"role": "system", "content": prompt.system_prompt + f'here you can sea your previous interactions with the user: {self.logs}'},
         {"role": "user", "content": user_prompt},
     ]
 
@@ -51,9 +52,8 @@ class ReAct:
             print (f"Loop: {turn_count}")
             print("----------------------")
             turn_count += 1
-
             response = self.generate_text_with_conversation(messages)
-
+            self.logs += response + "\n"
             print(response)
 
             try:
@@ -77,5 +77,5 @@ class ReAct:
                 break
 
 # Example usage with specifying the model:
-session = ReAct(model="gpt-4o")
-session.run_session("get the READMEFILE.MD of the github repo with this url 'https://github.com/OpenBMB/ChatDev.git' read it and set up the repo for me to use when(set up means doing whats the quicstart says)")
+# session = ReAct(model="gpt-4o")
+# session.run_session("get the READMEFILE.MD of the github repo with this url 'https://github.com/OpenBMB/ChatDev.git' read it and set up the repo for me to use when(set up means doing whats the quicstart says)")

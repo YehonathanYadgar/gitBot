@@ -14,7 +14,7 @@ Your available actions are:
 
 use_cmd:
 e.g. use_cmd: Null
-Runs the text you out in it in the windows command line. 
+Runs the text you out in it in the windows command line. remember the user also sees evrything thats hapning when you use the cmd.
 
 Example session:
 
